@@ -17,9 +17,11 @@ class Decks extends Component {
       .then((decks) => dispatch(receiveDecks(decks)))
       .then(() => this.setState(() => ({ready: true})))
   }
+  goToDeck = (deckId) => {
+    this.props.navigation.navigate('Deck', {deckId})
+  }
   goToAddDeck = () => {
-    const { navigation } = this.props;
-    navigation.dispatch(NavigationActions.navigate({routeName: 'AddDeck'}))
+    this.props.navigation.dispatch(NavigationActions.navigate({routeName: 'AddDeck'}))
   }
   render() {
     const { ready } = this.state;
@@ -32,6 +34,7 @@ class Decks extends Component {
     return (
       <DeckList decks={decks}
         hasDecks={hasDecks}
+        goToDeck={this.goToDeck}
         goToAddDeck={this.goToAddDeck}
       />
     )

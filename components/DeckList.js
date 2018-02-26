@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
+import Deck from './DeckListItem';
 
 class DeckList extends Component {
   render() {
-
-    const { decks, hasDecks, goToAddDeck } = this.props;
+    const { decks, hasDecks, goToDeck, goToAddDeck } = this.props;
 
     if (hasDecks) {
       return (
         <View>
-          <Text>Decks</Text>
-          <Text>{JSON.stringify(decks)}</Text>
+          { Object.keys(decks).map((deck) => (
+            <Deck key={deck}
+              deck={decks[deck]}
+              goToDeck={goToDeck}
+            />
+          ))}
         </View>
       )
     }
@@ -27,8 +31,6 @@ class DeckList extends Component {
   }
 }
 
-export default DeckList;
-
 const styles = StyleSheet.create({
   center: {
     flex: 1,
@@ -36,3 +38,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default DeckList;

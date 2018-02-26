@@ -7,8 +7,10 @@ import { Provider } from 'react-redux'
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 import reducer from './reducers';
+import Deck from './components/Deck';
 import Decks from './components/Decks';
 import AddDeck from './components/AddDeck';
+import AddCard from './components/AddCard';
 
 function FlashCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -19,7 +21,7 @@ function FlashCardsStatusBar ({backgroundColor, ...props}) {
 };
 
 const Tabs = TabNavigator({
-  Desks: {
+  Decks: {
     screen: Decks,
     navigationOptions: {
       tabBarLabel: 'View Decks',
@@ -57,6 +59,15 @@ const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
   Decks: {
     screen: Decks,
     navigationOptions: {
@@ -65,7 +76,16 @@ const MainNavigator = StackNavigator({
         backgroundColor: purple,
       }
     }
-  }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
 });
 
 export default class App extends React.Component {
