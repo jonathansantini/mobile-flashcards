@@ -24,7 +24,7 @@ class AddCard extends Component {
     }
   }
 
-  handleSubmit(e) {
+  handleSubmit() {
     const { dispatch, navigation, deckId } = this.props;
     const { question, answer } = this.state;
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (decks, { navigation }) {
   const { deckId } = navigation.state.params;
-console.log(decks)
+
   return {
     decks,
     deckId

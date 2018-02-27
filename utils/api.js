@@ -1,11 +1,16 @@
 import { AsyncStorage } from 'react-native';
-import { formatDecks, DECK_STORAGE_KEY } from './_decks'
+import { formatDeck, formatDecks, DECK_STORAGE_KEY } from './_decks'
 
 export function getDecks () {
   //AsyncStorage.clear();
   //console.log(AsyncStorage.getItem(DECK_STORAGE_KEY))
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(formatDecks)
+}
+
+export function getDeck (deckId) {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((results) => formatDeck({results, deckId}))
 }
 
 export function saveDeckTitle (title) {

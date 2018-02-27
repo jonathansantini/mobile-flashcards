@@ -1,6 +1,14 @@
+export const RECEIVE_DECK = 'RECEIVE_DECK';
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const ADD_DECK = 'ADD_DECK';
 export const ADD_CARD = 'ADD_CARD';
+
+export function receiveDeck (deck) {
+  return {
+    type: RECEIVE_DECK,
+    deck,
+  }
+}
 
 export function receiveDecks (decks) {
   return {

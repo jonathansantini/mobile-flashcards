@@ -16,7 +16,8 @@ class Deck extends Component {
     navigation.navigate('AddCard', {deckId})
   }
   goToQuiz = () => {
-
+    const { navigation, deckId } = this.props;
+    navigation.navigate('Quiz', {deckId})
   }
   render() {
     const { deck, cardNum } = this.props;
@@ -31,7 +32,10 @@ class Deck extends Component {
           Add Card
         </TextButton>
 
-        <TextButton style={{marginTop: 10}} onPress={this.goToQuiz}>
+        <TextButton style={{marginTop: 10}}
+          onPress={this.goToQuiz}
+          disabled={ cardNum ? false : true }
+        >
           Start Quiz
         </TextButton>
       </View>

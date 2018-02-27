@@ -1,8 +1,13 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
+import { RECEIVE_DECK, RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
 
 function decks (state = {}, action) {
-  const { type, decks, title, deckId, question, answer } = action;
+  const { type, deck, decks, title, deckId, question, answer } = action;
   switch (type) {
+    case RECEIVE_DECK :
+      return {
+        ...state,
+        ...deck,
+      }
     case RECEIVE_DECKS :
       return {
         ...state,
