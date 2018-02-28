@@ -13,6 +13,17 @@ export function getDeck (deckId) {
     .then((results) => formatDeck({results, deckId}))
 }
 
+export function removeDeckTitle (deckId) {
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((results) => {
+      const data = JSON.parse(results);
+      data[deckId] = undefined;
+      delete data[deckId];
+      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(data));
+      return data;
+    })
+}
+
 export function saveDeckTitle (title) {
   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
     [title]: {title}

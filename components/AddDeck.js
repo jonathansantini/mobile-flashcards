@@ -16,6 +16,13 @@ class AddDeck extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  resetForm() {
+    this.setState({
+      text: ''
+    })
+  }
+
   handleSubmit(e) {
     const { dispatch, navigation } = this.props;
     const { text } = this.state;
@@ -24,12 +31,15 @@ class AddDeck extends Component {
       saveDeckTitle(text)
         .then(() => dispatch(addDeck(text)))
         .then(() => navigation.dispatch(NavigationActions.back()))
+
+      this.resetForm();
     } else {
       this.setState({
         error: true
       })
     }
   }
+
   render() {
     const { error } = this.state;
 

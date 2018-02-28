@@ -1,4 +1,4 @@
-import { RECEIVE_DECK, RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
+import { RECEIVE_DECK, RECEIVE_DECKS, ADD_DECK, ADD_CARD, REMOVE_DECK } from '../actions'
 
 function decks (state = {}, action) {
   const { type, deck, decks, title, deckId, question, answer } = action;
@@ -19,6 +19,10 @@ function decks (state = {}, action) {
         [title]: {
           title
         }
+      }
+    case REMOVE_DECK :
+      return {
+        ...decks
       }
     case ADD_CARD:
       let questions = state[deckId].questions || [];

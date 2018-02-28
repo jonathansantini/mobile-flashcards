@@ -13,8 +13,8 @@ function DeckListItem (props) {
   const cardText = cardNum === 1 ? 'card' : 'cards';
 
   return (
-    <View style={styles.deck}>
-      <TouchableOpacity
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.deck}
         onPress={() => goToDeck(deck.title)}
       >
         <Text style={styles.title}>{deck.title}</Text>
@@ -25,16 +25,22 @@ function DeckListItem (props) {
 }
 
 const styles = StyleSheet.create({
-  deck: {
-    alignItems: 'center',
+  container: {
+    flex: 1,
     borderBottomWidth: 1,
     borderColor: black,
+  },
+  deck: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
     paddingTop: 15,
     paddingBottom: 15,
   },
   title: {
     fontSize: 20,
     marginBottom: 5,
+    alignItems: 'center',
   }
 });
 

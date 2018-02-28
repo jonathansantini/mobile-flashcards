@@ -18,10 +18,15 @@ class AddCard extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static navigationOptions = () => {
-    return {
-      title: 'Add Card'
-    }
+  static navigationOptions = {
+    title: 'Add Card'
+  }
+
+  resetForm() {
+    this.setState({
+      question: '',
+      answer: '',
+    })
   }
 
   handleSubmit() {
@@ -32,6 +37,8 @@ class AddCard extends Component {
       addCardToDeck({ deckId, question, answer })
         .then(() => dispatch(addCard({ deckId, question, answer })))
         .then(() => navigation.dispatch(NavigationActions.back()))
+
+      this.resetForm();
     } else {
       this.setState({
         error: true

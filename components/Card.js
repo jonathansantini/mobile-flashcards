@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
+import { yellow, black, red } from '../utils/colors';
 
 class Card extends Component {
   constructor(props) {
@@ -23,22 +24,22 @@ class Card extends Component {
     return (
       <View style={styles.center}>
         { !showAnswer
-          ? <Text>{question.question}</Text>
-          : <Text>{question.answer}</Text>
+          ? <Text style={styles.question}>{question.question}</Text>
+          : <Text style={styles.answer}>{question.answer}</Text>
         }
 
-        <TouchableOpacity onPress={() => this.toggleCard()}>
+        <TouchableOpacity style={styles.toggle} onPress={() => this.toggleCard()}>
           { !showAnswer
             ? <Text>Show Answer</Text>
             : <Text>Show Question</Text>
           }
         </TouchableOpacity>
 
-        <TextButton style={{marginTop: 10}} onPress={() => handleCorrectAnswer()}>
+        <TextButton style={styles.correctBtn} onPress={() => handleCorrectAnswer()}>
           Correct
         </TextButton>
 
-        <TextButton style={{marginTop: 10}} onPress={() => handleIncorrectAnswer()}>
+        <TextButton style={styles.incorrectBtn} onPress={() => handleIncorrectAnswer()}>
           Incorrect
         </TextButton>
       </View>
@@ -52,6 +53,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  question: {
+    fontSize: 20,
+    marginBottom: 15,
+  },
+  answer: {
+    fontSize: 20,
+    marginBottom: 15,
+  },
+  toggle: {
+    marginBottom: 25,
+  },
+  correctBtn: {
+    marginTop: 10,
+    backgroundColor: yellow,
+    color: black,
+  },
+  incorrectBtn: {
+    marginTop: 10,
+    backgroundColor: red,
+  }
 });
 
 export default Card;

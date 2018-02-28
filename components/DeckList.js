@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
 import Deck from './DeckListItem';
 
 class DeckList extends Component {
   render() {
-    const { decks, hasDecks, goToDeck, goToAddDeck } = this.props;
+    const { decks, hasDecks, toDeck, toAddDeck } = this.props;
 
     if (hasDecks) {
       return (
-        <View>
+        <ScrollView>
           { Object.keys(decks).map((deck) => (
             <Deck key={deck}
               deck={decks[deck]}
-              goToDeck={goToDeck}
+              goToDeck={toDeck}
             />
           ))}
-        </View>
+        </ScrollView>
       )
     }
 
     return (
       <View style={styles.center} >
         <Text>No Decks Are Available</Text>
-        <TextButton style={{marginTop: 10}} onPress={goToAddDeck}>
+        <TextButton style={{marginTop: 10}} onPress={toAddDeck}>
           CLICK HERE TO ADD A NEW DECK
         </TextButton>
       </View>

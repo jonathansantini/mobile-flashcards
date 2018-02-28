@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import DeckList from './DeckList';
 import { AppLoading } from 'expo';
@@ -11,18 +10,27 @@ class Decks extends Component {
   state = {
     ready: false
   }
+
   componentDidMount () {
     const { dispatch } = this.props;
+    //console.log('get')
     getDecks()
       .then((decks) => dispatch(receiveDecks(decks)))
       .then(() => this.setState(() => ({ready: true})))
   }
-  goToDeck = (deckId) => {
+
+  componentWillReceiveProps () {
+    //console.log('hi')
+  }
+
+  toDeck = (deckId) => {
     this.props.navigation.navigate('Deck', {deckId})
   }
-  goToAddDeck = () => {
+
+  toAddDeck = () => {
     this.props.navigation.dispatch(NavigationActions.navigate({routeName: 'AddDeck'}))
   }
+
   render() {
     const { ready } = this.state;
     const { decks, hasDecks } = this.props;
@@ -34,8 +42,8 @@ class Decks extends Component {
     return (
       <DeckList decks={decks}
         hasDecks={hasDecks}
-        goToDeck={this.goToDeck}
-        goToAddDeck={this.goToAddDeck}
+        toDeck={this.toDeck}
+        toAddDeck={this.toAddDeck}
       />
     )
   }

@@ -12,6 +12,7 @@ import Decks from './components/Decks';
 import AddDeck from './components/AddDeck';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/helpers'
 
 function FlashCardsStatusBar ({backgroundColor, ...props}) {
   return (
@@ -32,8 +33,8 @@ const Tabs = TabNavigator({
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'View Decks',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='folder' size={30} color={tintColor} />
+      tabBarLabel: 'Add Deck',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus' size={30} color={tintColor} />
     },
   },
 }, {
@@ -99,6 +100,9 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>

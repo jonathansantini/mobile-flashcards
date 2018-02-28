@@ -3,7 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import Card from './Card';
 import Score from './Score';
-import TextButton from './TextButton';
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from '../utils/helpers'
 import { getDeck } from "../utils/api";
 import { receiveDeck } from "../actions";
 import { NavigationActions } from "react-navigation";
@@ -17,10 +20,8 @@ class Quiz extends Component {
     }
   }
 
-  static navigationOptions = () => {
-    return {
-      title: 'Quiz'
-    }
+  static navigationOptions = {
+    title: 'Quiz'
   }
 
   handleCorrectAnswer() {
@@ -37,7 +38,21 @@ class Quiz extends Component {
   }
 
   backToDeck = () => {
-    this.props.navigation.dispatch(NavigationActions.back())
+    const { navigation, deckId } = this.props;
+    navigation.dispatch(NavigationActions.back({routeName: "Deck"}));
+
+    clearLocalNotification()
+      .then(setLocalNotification)
+  }
+
+  restartQuiz = () => {
+    this.setState({
+      index: 0,
+      numCorrect: 0,
+    })
+
+    clearLocalNotification()
+      .then(setLocalNotification)
   }
 
   componentDidMount() {
@@ -52,20 +67,17 @@ class Quiz extends Component {
 
     if ( index >= questionNum) {
       return (
-        <View style={{flex: 1}}>
-          <Score questionNum={questionNum}
-            numCorrect={numCorrect}
-          />
-          <TextButton style={{marginTop: 10}} onPress={() => this.backToDeck()}>
-            Return
-          </TextButton>
-        </View>
+        <Score questionNum={questionNum}
+          numCorrect={numCorrect}
+          backToDeck={this.backToDeck}
+          restartQuiz={this.restartQuiz}
+        />
       )
     }
 
     return (
       <View style={{flex: 1}}>
-        <Text>{`${index+1}/${questionNum}`}</Text>
+        <Text style={styles.counter}>{`${index+1}/${questionNum}`}</Text>
         <Card question={questions[index]}
           handleCorrectAnswer={() => this.handleCorrectAnswer()}
           handleIncorrectAnswer={() => this.handleIncorrectAnswer()}
@@ -81,6 +93,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  counter: {
+    padding: 5,
+    fontSize: 16,
+  }
 });
 
 function mapStateToProps (state, { navigation }) {
@@ -89,6 +105,7 @@ function mapStateToProps (state, { navigation }) {
   const questions = deck.questions;
 
   return {
+    deckId,
     questionNum: questions.length,
     questions,
   }
