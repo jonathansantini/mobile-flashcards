@@ -8,6 +8,7 @@ function decks (state = {}, action) {
         ...state,
         ...deck,
       }
+    case ADD_CARD:
     case RECEIVE_DECKS :
       return {
         ...state,
@@ -23,16 +24,6 @@ function decks (state = {}, action) {
     case REMOVE_DECK :
       return {
         ...decks
-      }
-    case ADD_CARD:
-      let questions = state[deckId].questions || [];
-      questions.push({ question, answer });
-      return {
-        ...state,
-        [deckId]: {
-          ...state[deckId],
-          questions,
-        }
       }
     default :
       return state

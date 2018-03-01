@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import TextButton from './TextButton';
 import { blue, red } from '../utils/colors';
+import PropTypes from 'prop-types';
 
 export default function Score ({ numCorrect, questionNum, backToDeck, restartQuiz }) {
   return (
@@ -49,3 +50,10 @@ const styles = StyleSheet.create({
     backgroundColor: red,
   },
 });
+
+Score.propTypes = {
+  numCorrect: PropTypes.number.isRequired,
+  questionNum: PropTypes.number.isRequired,
+  backToDeck: PropTypes.func.isRequired,
+  restartQuiz: PropTypes.func.isRequired,
+}

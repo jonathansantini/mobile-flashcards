@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Text, TextInput, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { red } from '../utils/colors';
 import TextButton from './TextButton';
@@ -33,6 +33,7 @@ class AddDeck extends Component {
         .then(() => navigation.dispatch(NavigationActions.back()))
 
       this.resetForm();
+      Keyboard.dismiss();
     } else {
       this.setState({
         error: true
@@ -44,7 +45,9 @@ class AddDeck extends Component {
     const { error } = this.state;
 
     return (
-      <View style={styles.center}>
+      <KeyboardAvoidingView style={styles.center}
+        behavior="padding"
+      >
         <Text>What is the name of the new deck?</Text>
         <TextInput
           style={styles.input}
@@ -59,7 +62,7 @@ class AddDeck extends Component {
         <TextButton style={{marginTop: 10}} onPress={this.handleSubmit}>
           Submit
         </TextButton>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -84,12 +87,4 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps (decks) {
-  return {
-    decks
-  }
-}
-
-export default connect(
-  mapStateToProps,
-)(AddDeck)
+export default connect()(AddDeck)

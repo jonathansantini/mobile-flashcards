@@ -32,11 +32,9 @@ export function addDeck (title) {
   }
 }
 
-export function addCard ({ deckId, question, answer }) {
+export function addCard (decks) {
   return {
     type: ADD_CARD,
-    deckId,
-    question,
-    answer,
+    decks,
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Text, TextInput, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { red } from '../utils/colors';
 import TextButton from './TextButton';
@@ -35,7 +35,7 @@ class AddCard extends Component {
 
     if (question && answer) {
       addCardToDeck({ deckId, question, answer })
-        .then(() => dispatch(addCard({ deckId, question, answer })))
+        .then((decks) => dispatch(addCard(decks)))
         .then(() => navigation.dispatch(NavigationActions.back()))
 
       this.resetForm();
@@ -49,7 +49,9 @@ class AddCard extends Component {
     const { error } = this.state;
 
     return (
-      <View style={styles.center}>
+      <KeyboardAvoidingView style={styles.center}
+        behavior="padding"
+      >
         <TextInput
           style={styles.input}
           onChangeText={(question) => this.setState({question})}
@@ -71,7 +73,7 @@ class AddCard extends Component {
         <TextButton style={{marginTop: 10}} onPress={this.handleSubmit}>
           Submit
         </TextButton>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }

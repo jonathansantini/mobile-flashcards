@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, StyleSheet } from 'react-native';
 import TextButton from './TextButton';
 import Deck from './DeckListItem';
+import PropTypes from 'prop-types';
 
 class DeckList extends Component {
   render() {
@@ -38,5 +39,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+DeckList.propTypes = {
+  decks: PropTypes.object.isRequired,
+  toDeck: PropTypes.func.isRequired,
+  toAddDeck: PropTypes.func.isRequired,
+}
 
 export default DeckList;

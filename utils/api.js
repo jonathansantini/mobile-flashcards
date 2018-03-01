@@ -3,7 +3,6 @@ import { formatDeck, formatDecks, DECK_STORAGE_KEY } from './_decks'
 
 export function getDecks () {
   //AsyncStorage.clear();
-  //console.log(AsyncStorage.getItem(DECK_STORAGE_KEY))
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(formatDecks)
 }
@@ -38,5 +37,6 @@ export function addCardToDeck ({ deckId, question, answer }) {
       data[deckId]['questions'] = data[deckId].questions || [];
       data[deckId]['questions'].push(newQuestion);
       AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(data));
+      return data;
     })
 }

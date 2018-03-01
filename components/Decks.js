@@ -19,10 +19,6 @@ class Decks extends Component {
       .then(() => this.setState(() => ({ready: true})))
   }
 
-  componentWillReceiveProps () {
-    //console.log('hi')
-  }
-
   toDeck = (deckId) => {
     this.props.navigation.navigate('Deck', {deckId})
   }
