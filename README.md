@@ -1,3 +1,19 @@
+# Mobile-Flashcards
+
+This is the final assessment project for Udacity's React Native course by building a mobile flashcard app.
+
+This repository includes the code for the API and scaffolding to build out the native react application.
+
+## View project
+
+To view the project right away:
+
+* In another terminal window, install and start the pre-scaffolded Create Native React App project
+    - `yarn install`
+    - `yarn start`
+
+###React Native
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
