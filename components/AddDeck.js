@@ -30,7 +30,7 @@ class AddDeck extends Component {
     if (text) {
       saveDeckTitle(text)
         .then(() => dispatch(addDeck(text)))
-        .then(() => navigation.dispatch(NavigationActions.back()))
+        .then(() => navigation.navigate('Deck', {deckId: text}));
 
       this.resetForm();
       Keyboard.dismiss();

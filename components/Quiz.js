@@ -39,7 +39,7 @@ class Quiz extends Component {
 
   backToDeck = () => {
     const { navigation, deckId } = this.props;
-    navigation.dispatch(NavigationActions.back({routeName: "Deck"}));
+      navigation.dispatch(NavigationActions.back({routeName: "Deck"}));
 
     clearLocalNotification()
       .then(setLocalNotification)

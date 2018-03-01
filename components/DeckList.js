@@ -4,32 +4,30 @@ import TextButton from './TextButton';
 import Deck from './DeckListItem';
 import PropTypes from 'prop-types';
 
-class DeckList extends Component {
-  render() {
-    const { decks, hasDecks, toDeck, toAddDeck } = this.props;
+function DeckList (props) {
+  const { decks, hasDecks, toDeck, toAddDeck } = props;
 
-    if (hasDecks) {
-      return (
-        <ScrollView>
-          { Object.keys(decks).map((deck) => (
-            <Deck key={deck}
-              deck={decks[deck]}
-              goToDeck={toDeck}
-            />
-          ))}
-        </ScrollView>
-      )
-    }
-
+  if (hasDecks) {
     return (
-      <View style={styles.center} >
-        <Text>No Decks Are Available</Text>
-        <TextButton style={{marginTop: 10}} onPress={toAddDeck}>
-          CLICK HERE TO ADD A NEW DECK
-        </TextButton>
-      </View>
+      <ScrollView>
+        { Object.keys(decks).map((deck) => (
+          <Deck key={deck}
+            deck={decks[deck]}
+            goToDeck={toDeck}
+          />
+        ))}
+      </ScrollView>
     )
   }
+
+  return (
+    <View style={styles.center} >
+      <Text>No Decks Are Available</Text>
+      <TextButton style={{marginTop: 10}} onPress={toAddDeck}>
+        CLICK HERE TO ADD A NEW DECK
+      </TextButton>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

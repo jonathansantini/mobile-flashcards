@@ -15,7 +15,6 @@ class AddCard extends Component {
       answer: '',
       error: false,
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   static navigationOptions = {
@@ -29,7 +28,7 @@ class AddCard extends Component {
     })
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     const { dispatch, navigation, deckId } = this.props;
     const { question, answer } = this.state;
 
@@ -45,6 +44,7 @@ class AddCard extends Component {
       })
     }
   }
+
   render() {
     const { error } = this.state;
 
